@@ -40,7 +40,7 @@ WHERE openpayments.Physician_Profile_ID LIKE "836689" AND Recipient_City LIKE "0
 SELECT *
 FROM openpayments
 ORDER BY Total_Amount_of_Payment_USDollars DESC;
--- What looks funny here?
+-- What looks funny here? 1000 isn't less than 900.
 
 SELECT sum(Total_Amount_of_Payment_USDollars)
 FROM openpayments;
@@ -78,7 +78,7 @@ WHERE Recipient_State LIKE "NY" AND Recipient_City IN ("NYC","New York City","Ne
 
 
 -- DEALING WITH DATES
--- Our format here is stored at a string. 11052015 is 11,052,015, so sorting by date won't work. For the purpose of this class, we're going to break the date all the way apart. Then we're gonna put it right back together with some separators.
+-- Our format here is stored as a value. 11052015 is 11,052,015 instead of November 5, 2015, so sorting by date won't work. For the purpose of this class, we're going to break the date all the way apart. Then we're gonna put it right back together with some separators.
 
 ALTER TABLE openpayments
 ADD COLUMN Payment_month varchar(2) AFTER Payment_date,
@@ -119,7 +119,7 @@ WHERE Cleaned_payment_date <= '2015-01-02';
 SELECT *
 FROM openpayments
 WHERE Cleaned_payment_date BETWEEN '2015-07-03' AND '2015-07-05';
--- Using "between" will capture both the start and end date in the data
+-- Using "between" will capture both the start and end date in the data, like => and =<
 
 
 ALTER TABLE openpayments
