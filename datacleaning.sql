@@ -1,6 +1,7 @@
 -- Encoding: UTF-8
 -- Record delimiter: CRLF
 -- Text qualifier: "
+-- Import the .csv and set all the field data types to VARCHAR
 
 -- LOOKING FOR ERRORS FIRST
 
