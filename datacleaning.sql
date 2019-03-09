@@ -92,12 +92,14 @@ SET Payment_month = LEFT(Payment_date,2);
 -- You want to start with the position of the first character you want to include.
 UPDATE openpayments
 SET Payment_day = MID(Payment_date,3,2);
+-- Does something look wrong here?
+                                                             
+-- The date separator counts as a character too.
+UPDATE openpayments
+SET Payment_day = MID(Payment_date,4,2);
 
 UPDATE openpayments
 SET Payment_year = RIGHT(Payment_date,4);
-
-
-
 
 -- PUTTING THE DATES BACK TOGETHER
 -- This sets the column to whatever the system default is for a date format. Probably YYYY-MM-DD or MM/DD/YYYY.
@@ -121,7 +123,6 @@ SELECT *
 FROM openpayments
 WHERE Cleaned_payment_date BETWEEN '2015-07-03' AND '2015-07-05';
 -- Using "between" will capture both the start and end date in the data, like => and =<
-
 
 ALTER TABLE openpayments
 DROP COLUMN Payment_month,
@@ -149,7 +150,7 @@ SELECT @i:=0;
 UPDATE doctor_types SET doctor_types.doctor_type_code = @i:=@i+1;
 
 ALTER TABLE openpayments
-ADD COLUMN Doctor_type_code varchar(2) AFTER Physician_Primary_Type
+ADD COLUMN Doctor_type_code varchar(2) AFTER Physician_Primary_Type;
 
 UPDATE openpayments, doctor_types
 SET openpayments.Doctor_type_code = doctor_types.doctor_type_code
